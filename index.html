@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2025 稅務試算</title>
     
-    <!-- === 手機 App 優化設定 (PWA) === -->
-    <!-- 1. 設定 App Icon (使用 SVG 內嵌，不需額外圖檔) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>">
+    <!-- === App Logo 設定 (關鍵修改) === -->
+    <!-- 1. 設定瀏覽器分頁小圖示 -->
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2910/2910768.png">
     
-    <!-- 2. iOS Safari 設定 -->
+    <!-- 2. 設定 iPhone/iPad 主畫面圖示 (Apple Touch Icon) -->
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2910/2910768.png">
+    
+    <!-- 3. 手機全螢幕與狀態列設定 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="稅務試算">
-    
-    <!-- 3. Android Chrome 設定 -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#2563eb">
 
@@ -25,11 +26,10 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- 引入 Babel (讓瀏覽器看懂 JSX) -->
+    <!-- 引入 Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        /* 簡單的淡入動畫 */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -37,9 +37,13 @@
         .animate-fadeIn {
             animation: fadeIn 0.3s ease-out forwards;
         }
-        /* 防止手機版橫向溢出 */
         body {
-            overscroll-behavior-y: none;
+            overscroll-behavior-y: none; /* 防止下拉重整 */
+            user-select: none; /* 讓它感覺更像 App，減少文字被選取 */
+            -webkit-tap-highlight-color: transparent;
+        }
+        input {
+            user-select: text; /* 輸入框還是要可以選取 */
         }
     </style>
 </head>
