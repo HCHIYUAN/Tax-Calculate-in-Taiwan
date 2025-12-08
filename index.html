@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>2025 稅務試算 (自提比例可調)</title>
+    <title>2025 稅務試算 (Firebase版)</title>
     
     <!-- === App Logo 設定 === -->
     <link rel="icon" type="image/png" href="logo.png">
@@ -25,6 +25,31 @@
     
     <!-- 引入 Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- === Firebase 初始化 === -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCl5HV3x98-BMIMYDJ_AKa_rZ5AMLX3j_A",
+        authDomain: "personal-tax-calculate.firebaseapp.com",
+        projectId: "personal-tax-calculate",
+        storageBucket: "personal-tax-calculate.firebasestorage.app",
+        messagingSenderId: "548109646444",
+        appId: "1:548109646444:web:785f570dd049942397b649",
+        measurementId: "G-4CLV6QT4RQ"
+      };
+
+      // Initialize Firebase
+      try {
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        console.log("Firebase initialized successfully");
+      } catch (e) {
+        console.error("Firebase initialization failed:", e);
+      }
+    </script>
 
     <style>
         @keyframes fadeIn {
