@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2025 稅務試算</title>
     
-    <!-- === App Logo 設定 (關鍵修改) === -->
-    <!-- 1. 設定瀏覽器分頁小圖示 -->
-    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2910/2910768.png">
+    <!-- === 自訂 App Logo 設定 === -->
+    <!-- 這裡設定成讀取您上傳的 logo.png -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
     
-    <!-- 2. 設定 iPhone/iPad 主畫面圖示 (Apple Touch Icon) -->
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2910/2910768.png">
-    
-    <!-- 3. 手機全螢幕與狀態列設定 -->
+    <!-- 手機全螢幕與狀態列設定 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="稅務試算">
@@ -38,12 +36,12 @@
             animation: fadeIn 0.3s ease-out forwards;
         }
         body {
-            overscroll-behavior-y: none; /* 防止下拉重整 */
-            user-select: none; /* 讓它感覺更像 App，減少文字被選取 */
+            overscroll-behavior-y: none;
+            user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
         input {
-            user-select: text; /* 輸入框還是要可以選取 */
+            user-select: text;
         }
     </style>
 </head>
