@@ -154,6 +154,12 @@
 
           const [showDetails, setShowDetails] = useState(false);
 
+          // 格式化數字 (加上逗點)
+          const formatNumber = (num) => {
+            if (num === '' || num === undefined || num === null) return '';
+            return new Intl.NumberFormat('en-US').format(num);
+          };
+
           const handleInputChange = (field, value) => {
             // 處理布林值和特殊控制項 (如 Checkbox/Select 的某些情況)
             if (field === 'isMarried') {
@@ -176,16 +182,19 @@
                 return;
             }
 
-            // --- 處理一般數字輸入框 (UX 優化核心) ---
+            // --- 處理文字/數字輸入框 (UX 優化核心：逗點處理) ---
             
-            // 1. 如果使用者清空輸入框，設定為空字串，而不是 0
-            if (value === '') {
+            // 1. 先移除所有逗點，以便轉成數字
+            const rawValue = typeof value === 'string' ? value.replace(/,/g, '') : value;
+
+            // 2. 如果使用者清空輸入框，設定為空字串
+            if (rawValue === '') {
                 setInputs(prev => ({ ...prev, [field]: '' }));
                 return;
             }
 
-            // 2. 正常輸入時，解析為數字
-            let parsedValue = parseInt(value, 10);
+            // 3. 正常輸入時，解析為數字
+            let parsedValue = parseInt(rawValue, 10);
             if (isNaN(parsedValue)) parsedValue = 0;
             if (parsedValue < 0) parsedValue = 0;
 
@@ -349,10 +358,10 @@
                           <label className="block text-sm font-medium text-slate-700 mb-1">本人薪資所得</label>
                           <div className="relative mb-3">
                             <input
-                              type="number"
+                              type="text" 
                               inputMode="numeric"
                               pattern="[0-9]*"
-                              value={inputs.salary}
+                              value={formatNumber(inputs.salary)}
                               onChange={(e) => handleInputChange('salary', e.target.value)}
                               className="w-full p-3 pl-8 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-lg"
                               placeholder="0"
@@ -387,10 +396,10 @@
                             <label className="block text-sm font-medium text-slate-700 mb-1">配偶薪資所得</label>
                             <div className="relative mb-3">
                               <input
-                                type="number"
+                                type="text"
                                 inputMode="numeric"
                                 pattern="[0-9]*"
-                                value={inputs.spouseIncome}
+                                value={formatNumber(inputs.spouseIncome)}
                                 onChange={(e) => handleInputChange('spouseIncome', e.target.value)}
                                 className="w-full p-3 pl-8 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-lg"
                                 placeholder="0"
@@ -424,10 +433,10 @@
                           <label className="block text-sm font-medium text-slate-700 mb-1">其他所得</label>
                           <div className="relative">
                             <input
-                              type="number"
+                              type="text"
                               inputMode="numeric"
                               pattern="[0-9]*"
-                              value={inputs.otherIncome}
+                              value={formatNumber(inputs.otherIncome)}
                               onChange={(e) => handleInputChange('otherIncome', e.target.value)}
                               className="w-full p-3 pl-8 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-lg"
                               placeholder="0"
@@ -559,9 +568,10 @@
                            </label>
                            <div className="relative">
                             <input
-                              type="number"
+                              type="text" 
                               inputMode="numeric"
-                              value={inputs.itemizedAmount}
+                              pattern="[0-9]*"
+                              value={formatNumber(inputs.itemizedAmount)}
                               onChange={(e) => handleInputChange('itemizedAmount', e.target.value)}
                               disabled={inputs.deductionMode === 'standard'}
                               className="w-full p-3 pl-8 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-lg"
